@@ -3,14 +3,25 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 document.getElementById("news-list").innerHTML = NEWS.map(n =>
   `<li><time>${esc(n.date)}</time><span>${esc(n.text)}</span></li>`).join("");
-document.getElementById("pub-list").innerHTML = PUBLICATIONS.map(p => {
-  const links = [p.doi && `<a href="${esc(p.doi)}">DOI</a>`, p.pdf && `<a href="${esc(p.pdf)}">PDF</a>`].filter(Boolean).join("");
-  return `<li><div class="pub-title">${esc(p.title)}</div>
-    <div class="pub-meta">${esc(p.authors).replace("N. Marasciuolo", "<strong>N. Marasciuolo</strong>")}</div>
-    <div class="pub-meta"><em>${esc(p.venue)}</em>${p.details ? ", " + esc(p.details) : ""}, ${esc(p.year)}</div>
-    ${links ? `<div class="pub-links">${links}</div>` : ""}
-    ${p.abstract ? `<details><summary>Abstract</summary><p>${esc(p.abstract)}</p></details>` : ""}</li>`;
-}).join("");
+const own = "N. Marasciuolo";
+const byYear = {};
+[...PUBLICATIONS].sort((x, y) => y.year - x.year).forEach(p => (byYear[p.year] = byYear[p.year] || []).push(p));
+const pubList = document.getElementById("pub-list");
+pubList.innerHTML = Object.keys(byYear).sort((x, y) => y - x).map(y =>
+  `<h3 class="year">${y}</h3><ol class="bib">` + byYear[y].map(p => {
+    const btns = [p.abstract && `<button type="button" class="abs">Abs</button>`,
+      p.doi && `<a href="${esc(p.doi)}">DOI</a>`, p.pdf && `<a href="${esc(p.pdf)}">PDF</a>`].filter(Boolean).join("");
+    return `<li><div class="abbr">${p.abbr ? `<span class="badge">${esc(p.abbr)}</span>` : ""}</div><div class="entry">
+      <div class="pub-title">${esc(p.title)}</div>
+      <div class="pub-meta">${esc(p.authors).replace(own, `<b class="me">${own}</b>`)}</div>
+      <div class="pub-meta"><em>${esc(p.venue)}</em>${p.details ? ", " + esc(p.details) : ""}, ${esc(p.year)}</div>
+      ${btns ? `<div class="pub-links">${btns}</div>` : ""}
+      ${p.abstract ? `<div class="abstract" hidden>${esc(p.abstract)}</div>` : ""}</div></li>`;
+  }).join("") + `</ol>`).join("");
+pubList.addEventListener("click", e => {
+  const b = e.target.closest(".abs"); if (!b) return;
+  const box = b.closest(".entry").querySelector(".abstract"); box.hidden = !box.hidden;
+});
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // ---------- Reticolo animato nell'intestazione ----------
