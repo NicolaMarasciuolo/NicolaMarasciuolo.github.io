@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nicola [Surname]</title>
+<meta name="description" content="Postdoctoral researcher in structural mechanics: lattice metamaterials, homogenization, continuum modeling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#top">Nicola [Surname]</a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#news">News</a>
+    <a href="#publications">Publications</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Nicola [Surname]</h1>
+      <p class="role">Postdoctoral researcher in structural mechanics, [University / Department]</p>
+      <p class="lead">I study how periodic lattices lose stability, and how to describe that behavior with continuum models simple enough to design with.</p>
+      <p class="actions">
+        <a class="btn" href="#publications">Read my publications</a>
+        <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
+      </p>
+    </div>
+    <figure class="hero-fig">
+      <canvas id="lattice" role="img" aria-label="Animation of a square lattice buckling in a long-wavelength mode or in a cell-scale mode"></canvas>
+      <figcaption>
+        <span>Buckling mode of a square lattice:</span>
+        <button class="mode macro" aria-pressed="true" data-mode="macro">macro (whole structure)</button>
+        <button class="mode micro" aria-pressed="false" data-mode="micro">micro (single cell)</button>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section id="about" class="block about">
+    <h2>About</h2>
+    <div class="about-grid">
+      <img src="assets/img/foto.jpg" alt="Portrait of Nicola [Surname]" class="photo" onerror="this.style.display='none'">
+      <div>
+        <p>I am a postdoctoral researcher at [University / Department]. I work on lattice metamaterials, homogenization and continuum modeling.</p>
+        <p>My research connects discrete Bloch–Floquet analysis with enriched continuum models, micropolar and strain gradient elasticity, to capture both macro-scale and micro-scale critical modes in periodic lattice structures.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" class="block">
+    <h2>Research</h2>
+    <dl class="topics">
+      <dt>Discrete Bloch–Floquet analysis</dt>
+      <dd>A periodic lattice can be studied through a single unit cell. Bloch–Floquet analysis gives the critical loads and the buckling modes of the whole periodic structure from that one cell.</dd>
+      <dt>Enriched continuum models</dt>
+      <dd>Micropolar and strain gradient elasticity add rotations and gradients to classical elasticity, so that the continuum still carries information about what happens inside the cell.</dd>
+      <dt>Macro and micro critical modes</dt>
+      <dd>Comparing the two descriptions shows when an instability involves the whole structure and when it stays at the scale of the cell, and whether the continuum model can predict each case.</dd>
+    </dl>
+  </section>
+
+  <section id="news" class="block">
+    <h2>News</h2>
+    <ul id="news-list" class="news"></ul>
+  </section>
+
+  <section id="publications" class="block">
+    <h2>Publications</h2>
+    <ol id="pub-list" class="pubs"></ol>
+  </section>
+
+  <section id="contact" class="block">
+    <h2>Contact</h2>
+    <p>Email is the best way to reach me: <a href="mailto:name@university.it">name@university.it</a></p>
+    <p class="links">
+      <a href="https://scholar.google.com/">Google Scholar</a>
+      <a href="https://orcid.org/">ORCID</a>
+      <a href="https://github.com/">GitHub</a>
+      <a href="https://www.linkedin.com/">LinkedIn</a>
+      <a href="https://www.researchgate.net/">ResearchGate</a>
+    </p>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Nicola [Surname]</footer>
+<script src="dati.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
