@@ -3,31 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nicola [Surname]</title>
+<title>Nicola Marasciuolo</title>
 <meta name="description" content="Postdoctoral researcher in structural mechanics: lattice metamaterials, homogenization, continuum modeling.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("tema")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="nav">
-  <a class="brand" href="#top">Nicola [Surname]</a>
+  <a class="brand" href="#top">Nicola Marasciuolo</a>
   <nav>
     <a href="#about">About</a>
     <a href="#research">Research</a>
     <a href="#news">News</a>
     <a href="#publications">Publications</a>
     <a href="#contact">Contact</a>
+    <button id="theme" aria-label="Switch between light and dark theme"><svg class="moon" viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
   </nav>
 </header>
 
-<main id="top">
+<div class="hero-wrap" id="top">
   <section class="hero">
     <div class="hero-text">
-      <h1>Nicola [Surname]</h1>
+      <h1>Nicola Marasciuolo</h1>
       <p class="role">Postdoctoral researcher in structural mechanics, [University / Department]</p>
       <p class="lead">I study how periodic lattices lose stability, and how to describe that behavior with continuum models simple enough to design with.</p>
+      <ul class="chips"><li>Lattice metamaterials</li><li>Bloch–Floquet analysis</li><li>Homogenization</li><li>Strain gradient elasticity</li><li>Masonry limit analysis</li></ul>
       <p class="actions">
         <a class="btn" href="#publications">Read my publications</a>
         <a class="btn ghost" href="assets/cv.pdf">Download CV</a>
@@ -42,11 +45,14 @@
       </figcaption>
     </figure>
   </section>
+</div>
+<main>
+  <section class="stats" id="stats"></section>
 
-  <section id="about" class="block about">
+  <section id="about">
     <h2>About</h2>
     <div class="about-grid">
-      <img src="assets/img/foto.jpg" alt="Portrait of Nicola [Surname]" class="photo" onerror="this.style.display='none'">
+      <img src="assets/img/foto.jpg" alt="Portrait of Nicola Marasciuolo" class="photo" onerror="this.style.display='none'">
       <div>
         <p>I am a postdoctoral researcher at [University / Department]. I work on lattice metamaterials, homogenization and continuum modeling.</p>
         <p>My research connects discrete Bloch–Floquet analysis with enriched continuum models, micropolar and strain gradient elasticity, to capture both macro-scale and micro-scale critical modes in periodic lattice structures.</p>
@@ -54,29 +60,28 @@
     </div>
   </section>
 
-  <section id="research" class="block">
+  <section id="research">
     <h2>Research</h2>
-    <dl class="topics">
-      <dt>Discrete Bloch–Floquet analysis</dt>
-      <dd>A periodic lattice can be studied through a single unit cell. Bloch–Floquet analysis gives the critical loads and the buckling modes of the whole periodic structure from that one cell.</dd>
-      <dt>Enriched continuum models</dt>
-      <dd>Micropolar and strain gradient elasticity add rotations and gradients to classical elasticity, so that the continuum still carries information about what happens inside the cell.</dd>
-      <dt>Macro and micro critical modes</dt>
-      <dd>Comparing the two descriptions shows when an instability involves the whole structure and when it stays at the scale of the cell, and whether the continuum model can predict each case.</dd>
-    </dl>
+    <div class="topics">
+      <div class="topic"><h3>Discrete Bloch–Floquet analysis</h3><p>A periodic lattice can be studied through a single unit cell. Bloch–Floquet analysis gives the critical loads and the buckling modes of the whole periodic structure from that one cell.</p></div>
+      <div class="topic"><h3>Enriched continuum models</h3><p>Micropolar and strain gradient elasticity add rotations and gradients to classical elasticity, so that the continuum still carries information about what happens inside the cell.</p></div>
+      <div class="topic"><h3>Macro and micro critical modes</h3><p>Comparing the two descriptions shows when an instability involves the whole structure and when it stays at the scale of the cell, and whether the continuum model can predict each case.</p></div>
+      <div class="topic"><h3>Masonry and structural optimization</h3><p>Limit analysis of masonry arches and block assemblies with frictional joints, and optimal design of cable-braced and tensegrity structures.</p></div>
+    </div>
   </section>
 
-  <section id="news" class="block">
+  <section id="news">
     <h2>News</h2>
     <ul id="news-list" class="news"></ul>
   </section>
 
-  <section id="publications" class="block">
+  <section id="publications">
     <h2>Publications</h2>
+    <div class="filters" id="filters"><button data-f="all" aria-pressed="true">All</button><button data-f="journal" aria-pressed="false">Journal articles</button><button data-f="conference" aria-pressed="false">Conference papers</button></div>
     <ol id="pub-list" class="pubs"></ol>
   </section>
 
-  <section id="contact" class="block">
+  <section id="contact">
     <h2>Contact</h2>
     <p>Email is the best way to reach me: <a href="mailto:name@university.it">name@university.it</a></p>
     <p class="links">
@@ -89,7 +94,7 @@
   </section>
 </main>
 
-<footer>© <span id="year"></span> Nicola [Surname]</footer>
+<footer>© <span id="year"></span> Nicola Marasciuolo</footer>
 <script src="dati.js"></script>
 <script src="script.js"></script>
 </body>

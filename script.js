@@ -1,20 +1,37 @@
 // ---------- Novità e pubblicazioni (letti da dati.js) ----------
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 document.getElementById("news-list").innerHTML = NEWS.map(n =>
   `<li><time>${esc(n.date)}</time><span>${esc(n.text)}</span></li>`).join("");
-document.getElementById("pub-list").innerHTML = PUBLICATIONS.map(p => {
-  const links = [p.doi && `<a href="${esc(p.doi)}">DOI</a>`, p.pdf && `<a href="${esc(p.pdf)}">PDF</a>`].filter(Boolean).join("");
-  return `<li><div class="pub-title">${esc(p.title)}</div>
-    <div class="pub-meta">${esc(p.authors)}</div>
-    <div class="pub-meta"><em>${esc(p.venue)}</em>, ${esc(p.year)}</div>
-    ${links ? `<div class="pub-links">${links}</div>` : ""}
-    ${p.abstract ? `<details><summary>Abstract</summary><p>${esc(p.abstract)}</p></details>` : ""}</li>`;
-}).join("");
+function showPubs(f) {
+  document.getElementById("pub-list").innerHTML = PUBLICATIONS.filter(p => f === "all" || p.type === f).map(p => {
+    const links = [p.doi && `<a href="${esc(p.doi)}">DOI</a>`, p.pdf && `<a href="${esc(p.pdf)}">PDF</a>`].filter(Boolean).join("");
+    return `<li class="${p.type}"><div class="pub-year">${esc(p.year)}</div><div>
+      <div class="pub-title">${esc(p.title)}</div>
+      <div class="pub-meta">${esc(p.authors).replace("N. Marasciuolo", "<strong>N. Marasciuolo</strong>")}</div>
+      <div class="pub-meta"><em>${esc(p.venue)}</em>${p.details ? ", " + esc(p.details) : ""}<span class="tag">${p.type === "journal" ? "Journal" : "Conference"}</span></div>
+      ${links ? `<div class="pub-links">${links}</div>` : ""}
+      ${p.abstract ? `<details><summary>Abstract</summary><p>${esc(p.abstract)}</p></details>` : ""}</div></li>`;
+  }).join("");
+}
+showPubs("all");
+document.querySelectorAll("#filters button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#filters button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  showPubs(b.dataset.f);
+}));
+const nJ = PUBLICATIONS.filter(p => p.type === "journal").length, nC = PUBLICATIONS.length - nJ;
+document.getElementById("stats").innerHTML = [[PUBLICATIONS.length, "publications"], [nJ, "journal articles"], [nC, "conference papers"]]
+  .map(([n, t]) => `<div class="stat"><b>${n}</b><span>${t}</span></div>`).join("");
 document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("theme").addEventListener("click", () => {
+  const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = t;
+  try { localStorage.setItem("tema", t); } catch (e) {}
+  if (reduce) draw(0);
+});
 
 // ---------- Reticolo animato nell'intestazione ----------
 const cv = document.getElementById("lattice"), ctx = cv.getContext("2d");
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const NX = 14, NY = 9;
 let mode = "macro", W, H;
 
