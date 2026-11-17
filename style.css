@@ -61,3 +61,11 @@ h3.year:first-child{margin-top:0}
 .social a:hover{color:var(--macro);text-decoration:none}
 footer{max-width:var(--max);margin:3.5rem auto 0;padding:1.5rem 1.2rem 2.5rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
 @media (max-width:760px){.hero{grid-template-columns:1fr}.about-grid{flex-direction:column}.news li{grid-template-columns:1fr;gap:0}.bib li{grid-template-columns:1fr;gap:.3rem}}
+
+.nav nav a.active{color:var(--macro)}
+.page-head{padding-top:3rem!important}
+.page-head h1{font-size:clamp(2rem,4.5vw,2.6rem);margin-bottom:.3em}
+.sub{color:var(--muted);max-width:68ch;margin:0 0 .5rem}
+.list{padding-top:1.5rem!important}
+.more{margin:1.2rem 0 0}
+.empty{color:var(--muted)}
